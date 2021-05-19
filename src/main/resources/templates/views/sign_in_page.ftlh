@@ -1,22 +1,19 @@
 <#include 'base.ftlh'>
 <#macro content>
-    <body class="sign-body">
-    <div class="sign-wrapper">
-        <h1 class="name">Wallet</h1>
-        <form method="post">
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <input class="email  form-control" name="email" type="text" placeholder="Введите email" required>
+    <body class="sign">
+    <div class="form-center">
+        <div class="h2 mb-3 font-weigh  t-normal text-center">Wallet</div>
+        <form class="form-login" method="post" action="${springMacroRequestContext.contextPath}/signIn">
+            <h1 class="h4 mb-3 font-weight-normal text-center">Авторизация</h1>
+            <input class="form-control first" name="email" type="email" placeholder="Email" required>
+            <input class="form-control last" name="password" type="password" placeholder="Пароль">
+            <#if error?has_content>
+                <div class="alert alert-danger" role="alert">
+                    ${error}
                 </div>
-                <div class="form-group col-md-12">
-                    <input class="password  form-control" name="password" type="password" placeholder="Введите пароль"
-                           required>
-                </div>
-            </div>
-            <div>
-                <button type="submit" class="btn btn-primary col-md-6">Войти</button>
-                <a class="link-to-registration" href="">Зарегистрироваться!</a>
-            </div>
+            </#if>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Войти</button>
+            <a href="/signUp">Зарегистрироваться!</a>
         </form>
         <#--        <c:if test="${not empty requestScope.loginErr}">-->
         <#--            <span class="loginErr" style="color:red;"><c:out value=""/></span>-->

@@ -352,3 +352,70 @@ input::-webkit-inner-spin-button {
     width: 100%;
     /*table-layout: fixed;*/
 }
+
+
+/*new*/
+
+body.sign {
+    background: #EDEEF0;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+body.main {
+    background: #EDEEF0;
+    height: 100vh
+}
+
+.navbar {
+    background-color: #FFFFFF;
+}
+
+.content-wrapper {
+    background-color: #FFFFFF;
+    border-radius: .3rem;
+    margin: 15px auto;
+    padding: 15px;
+}
+
+.form-center {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 550px;
+    padding: 20px;
+    margin: auto;
+    /*border: #0069d9 solid 1px;*/
+    border-radius: .7rem;
+    box-shadow: 0 0 10px #0069d9;
+}
+
+.form-login {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.form-control {
+    background-color: #EDEEF0;
+    margin-bottom: 1rem;
+    height: 3.125rem;
+    padding: .75rem;
+}
+
+.form-center .checkbox {
+    font-weight: 400;
+}
+
+.form-center .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-center .form-control:focus {
+    z-index: 2;
+}

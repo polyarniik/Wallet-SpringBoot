@@ -1,32 +1,28 @@
 <#ftl encoding='UTF-8'/>
 <#include 'base.ftlh'>
 <#macro content>
-    <body class="sign-body">
-    <div class="sign-wrapper">
-        <h1 class="name">Wallet</h1>
-        <form method="post">
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <input class="name  form-control" name="name" type="text" placeholder="Введите имя" required>
-                </div>
-                <div class="form-group col-md-12">
-                    <input class="email  form-control" name="email" type="text" placeholder="Введите email" required>
-                </div>
-                <div class="form-group col-md-12">
-                    <input class="password  form-control" name="password" type="password" placeholder="Введите пароль" required>
-                </div>
-                <div class="form-group col-md-12">
-                    <input class="passwordRepeat  form-control" name="passwordRepeat" type="password" placeholder="Введите пароль ещё раз" required>
-                </div>
-            </div>
-            <div class="registration-bottom justify-content-between">
-                <button type="submit" class="btn btn-primary col-md-6">Зарегистрироваться</button>
-                <a class="link-to-login" href="#" style="margin-top: 10px; text-align: center">Войти</a>
-            </div>
+    <body class="sign">
+    <div class="form-center">
+        <div class="h2 mb-3 font-weight-normal text-center">Pluerr</div>
+        <form method="post" class="form-login">
+            <h1 class="h4 mb-3 font-weight-normal text-center">Регистрация</h1>
+            <input name="email" type="email" id="inputEmail" class="form-control first" placeholder="Email" required
+                   autofocus>
+            <input name="name" type="text" id="inputName" class="form-control" placeholder="Имя" required
+                   autofocus>
+            <input name="password1" type="password" id="inputPassword" class="form-control" placeholder="Пароль"
+                   required>
+            <input name="password2" type="password" id="inputPassword2" class="form-control last"
+                   placeholder="Повтор пароля" required>
+            <#if errorList?has_content>
+                <#list errorList as error>
+                    <div class="alert alert-danger" role="alert">
+                        ${error.getDefaultMessage()}
+                    </div>
+                </#list>
+            </#if>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
         </form>
-<#--        <c:if test="${not empty requestScope.regErr}">-->
-<#--            <span class="regErr" style="text-align: center; color: red"><c:out value="${requestScope.regErr}"/></span>-->
-<#--        </c:if>-->
     </div>
     </body>
 </#macro>
