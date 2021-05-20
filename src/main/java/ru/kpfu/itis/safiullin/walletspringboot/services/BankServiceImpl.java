@@ -11,14 +11,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BankService {
+public class BankServiceImpl implements BankService {
     private final BankRepository bankRepository;
 
     @Autowired
-    public BankService(BankRepository bankRepository) {
+    public BankServiceImpl(BankRepository bankRepository) {
         this.bankRepository = bankRepository;
     }
 
+    @Override
     public void save(BankDto bank) {
         bankRepository.save(
                 Bank.builder()
@@ -29,10 +30,12 @@ public class BankService {
         );
     }
 
+    @Override
     public Optional<Bank> findById(Long id) {
         return bankRepository.findById(id);
     }
 
+    @Override
     public void delete(BankDto bank) {
         bankRepository.delete(
                 Bank.builder()
@@ -41,14 +44,17 @@ public class BankService {
         );
     }
 
+    @Override
     public List<Bank> getAccountBanks(AccountDto account) {
         return bankRepository.findBanksByAccount_Id(account.getId());
     }
 
+    @Override
     public void changeAmount(Long bankID, float amount) {
         bankRepository.setAmount(bankID, amount);
     }
 
+    @Override
     public List<Bank> getNotUserBanks(Long id) {
         List<Bank> allBanks = bankRepository.findAll();
         List<Bank> userBanks = bankRepository.findBanksByAccount_Id(id);

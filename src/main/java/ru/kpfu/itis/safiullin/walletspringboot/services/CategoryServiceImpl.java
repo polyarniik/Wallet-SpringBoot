@@ -9,18 +9,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoryService {
+public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
+    @Override
     public Optional<Category> findCategoryById(Long id) {
         return categoryRepository.findById(id);
     }
 
+    @Override
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }

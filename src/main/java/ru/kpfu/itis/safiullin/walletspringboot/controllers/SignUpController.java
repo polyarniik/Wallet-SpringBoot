@@ -7,7 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.kpfu.itis.safiullin.walletspringboot.forms.SignUpForm;
-import ru.kpfu.itis.safiullin.walletspringboot.services.AccountService;
+import ru.kpfu.itis.safiullin.walletspringboot.services.AccountServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -15,10 +15,10 @@ import javax.validation.Valid;
 @Controller
 public class SignUpController {
 
-    private final AccountService accountService;
+    private final AccountServiceImpl accountService;
 
     @Autowired
-    public SignUpController(AccountService accountService) {
+    public SignUpController(AccountServiceImpl accountService) {
         this.accountService = accountService;
     }
 
@@ -40,7 +40,8 @@ public class SignUpController {
         if (result.hasErrors()) {
             System.out.print("error ");
             System.out.println(result.getAllErrors().get(0).shouldRenderDefaultMessage());
-            model.addAttribute("errorList", result.getAllErrors());
+            model.addAttribute("errorList",
+                    result.getAllErrors());
             model.addAttribute("form", form);
             return "sign_up_page";
         }
