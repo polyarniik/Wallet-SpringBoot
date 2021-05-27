@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kpfu.itis.safiullin.walletspringboot.models.Category;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,5 +26,9 @@ public class CategoryDto {
                 .color(category.getColor())
                 .iconName(category.getIconName())
                 .build();
+    }
+
+    public static List<CategoryDto> from(List<Category> categories) {
+        return categories.stream().map(CategoryDto::fromCategory).collect(Collectors.toList());
     }
 }

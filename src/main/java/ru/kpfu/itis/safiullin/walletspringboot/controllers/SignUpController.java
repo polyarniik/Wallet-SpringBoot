@@ -24,28 +24,23 @@ public class SignUpController {
 
     @GetMapping("/signUp")
     public String getSingUp(Model model) {
-        model.addAttribute("form",
-                SignUpForm.builder()
-                        .name("")
-                        .email("")
-                        .password1("")
-                        .password2("")
-                        .build()
-        );
-        return "sign_up_page";
+        model.addAttribute("form",new SignUpForm());
+        return "views/sign_up_page";
     }
 
     @PostMapping("/signUp")
-    public String signUp(@Valid SignUpForm form, BindingResult result, Model model, HttpServletRequest request) {
+    public String signUp(Model model, @Valid SignUpForm form, BindingResult result, HttpServletRequest request) {
         if (result.hasErrors()) {
-            System.out.print("error ");
-            System.out.println(result.getAllErrors().get(0).shouldRenderDefaultMessage());
-            model.addAttribute("errorList",
-                    result.getAllErrors());
+            model.addAttribute("errorList", result.getAllErrors());
             model.addAttribute("form", form);
-            return "sign_up_page";
+            return "views/sign_up_page";
         }
-        accountService.singUpAccount(form);
+        try {
+            accountService.singUpAccount(form);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", "Аккаунт с таким email уже существует!");
+            return "views/sign_up_page";
+        }
 //        try {
 //            userService.addUser(form);
 //        }
@@ -59,6 +54,6 @@ public class SignUpController {
 //        } catch (ServletException e) {
 //            throw new IllegalArgumentException(e);
 //        }
-        return "redirect:/wallet";
+        return "redirect:/";
     }
 }

@@ -17,7 +17,6 @@ public class AccountDto {
     private Long id;
     private String name;
     private String email;
-    private String password;
     private List<BankDto> bankList;
 
     public static AccountDto fromAccount(Account account) {
@@ -25,7 +24,6 @@ public class AccountDto {
                 .id(account.getId())
                 .name(account.getName())
                 .email(account.getEmail())
-                .password(account.getPassword())
                 .bankList(account.getBanks().stream().map(BankDto::fromBank).collect(Collectors.toList()))
                 .build();
     }

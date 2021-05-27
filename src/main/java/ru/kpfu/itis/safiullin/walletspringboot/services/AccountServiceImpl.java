@@ -24,15 +24,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Optional<AccountDto> findByEmail(String email) {
-        Optional<Account> account = accountRepository.findByEmail(email);
-        return account.map(AccountDto::fromAccount);
-    }
-
-    @Override
     public void singUpAccount(SignUpForm form) {
         if ((accountRepository.findByEmail(form.getEmail())).isPresent()) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
         Account account = Account.builder()
                 .name(form.getName())
@@ -42,6 +36,16 @@ public class AccountServiceImpl implements AccountService {
                 .state(Account.State.ACTIVE)
                 .build();
         accountRepository.save(account);
+    }
+
+    @Override
+    public AccountDto findById(Long id) {
+        Optional<Account> account = accountRepository.findById(id);
+        if (account.isPresent()) {
+            return AccountDto.fromAccount(account.get());
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
 }

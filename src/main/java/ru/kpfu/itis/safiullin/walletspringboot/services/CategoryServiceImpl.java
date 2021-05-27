@@ -2,6 +2,7 @@ package ru.kpfu.itis.safiullin.walletspringboot.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kpfu.itis.safiullin.walletspringboot.dto.CategoryDto;
 import ru.kpfu.itis.safiullin.walletspringboot.models.Category;
 import ru.kpfu.itis.safiullin.walletspringboot.repositories.CategoryRepository;
 
@@ -18,12 +19,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> findCategoryById(Long id) {
-        return categoryRepository.findById(id);
+    public CategoryDto findCategoryById(Long id) {
+        Optional<Category> category = categoryRepository.findById(id);
+        if (category.isPresent()) {
+            return CategoryDto.fromCategory(category.get());
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+    public List<CategoryDto> findAll() {
+        return CategoryDto.from(categoryRepository.findAll());
     }
 }

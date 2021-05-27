@@ -1,12 +1,11 @@
 package ru.kpfu.itis.safiullin.walletspringboot.services;
 
-import ru.kpfu.itis.safiullin.walletspringboot.models.Category;
+import ru.kpfu.itis.safiullin.walletspringboot.dto.CategoryDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CategoryService {
-    Optional<Category> findCategoryById(Long id);
+    CategoryDto findCategoryById(Long id);
 
-    List<Category> findAll();
+    List<CategoryDto> findAll();
 }

@@ -38,6 +38,10 @@ public class AccountDetailsImpl implements UserDetails {
         return true;
     }
 
+    public Long getId() {
+        return account.getId();
+    }
+
     @Override
     public boolean isAccountNonLocked() {
         return account.isActive();

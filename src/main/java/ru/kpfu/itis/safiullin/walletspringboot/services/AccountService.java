@@ -6,7 +6,7 @@ import ru.kpfu.itis.safiullin.walletspringboot.forms.SignUpForm;
 import java.util.Optional;
 
 public interface AccountService {
-    Optional<AccountDto> findByEmail(String email);
-
     void singUpAccount(SignUpForm form);
+
+    AccountDto findById(Long id);
 }

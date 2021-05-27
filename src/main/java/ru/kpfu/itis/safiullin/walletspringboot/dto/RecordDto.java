@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import ru.kpfu.itis.safiullin.walletspringboot.models.Record;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -31,5 +33,9 @@ public class RecordDto {
                 .description(record.getDescription())
                 .date(record.getDate())
                 .build();
+    }
+
+    public static List<RecordDto> from(List<Record> records) {
+        return records.stream().map(RecordDto::fromRecord).collect(Collectors.toList());
     }
 }

@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RecordRepository extends JpaRepository<Record, Long> {
-    List<Record> findRecordsByAccount(Account id);
+
+    List<Record> findRecordsByAccount_IdOrderByDateDesc(Long id);
 
     Optional<Record> findRecordById(Long id);
+
+    void deleteById(Long id);
 }
 

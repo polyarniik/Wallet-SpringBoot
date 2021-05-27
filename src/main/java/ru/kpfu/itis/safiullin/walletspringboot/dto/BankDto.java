@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kpfu.itis.safiullin.walletspringboot.models.Bank;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,5 +26,9 @@ public class BankDto {
                 .color(bank.getColor())
                 .amount(bank.getAmount())
                 .build();
+    }
+
+    public static List<BankDto> from(List<Bank> banks) {
+        return banks.stream().map(BankDto::fromBank).collect(Collectors.toList());
     }
 }

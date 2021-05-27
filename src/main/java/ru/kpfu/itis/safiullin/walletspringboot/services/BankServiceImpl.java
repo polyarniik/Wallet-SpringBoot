@@ -2,7 +2,6 @@ package ru.kpfu.itis.safiullin.walletspringboot.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.kpfu.itis.safiullin.walletspringboot.dto.AccountDto;
 import ru.kpfu.itis.safiullin.walletspringboot.dto.BankDto;
 import ru.kpfu.itis.safiullin.walletspringboot.models.Bank;
 import ru.kpfu.itis.safiullin.walletspringboot.repositories.BankRepository;
@@ -31,8 +30,13 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public Optional<Bank> findById(Long id) {
-        return bankRepository.findById(id);
+    public BankDto findById(Long id) {
+        Optional<Bank> bank = bankRepository.findById(id);
+        if (bank.isPresent()) {
+            return BankDto.fromBank(bank.get());
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -45,23 +49,19 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public List<Bank> getAccountBanks(AccountDto account) {
-        return bankRepository.findBanksByAccount_Id(account.getId());
+    public List<BankDto> getAccountBanks(Long accountId) {
+        return BankDto.from(bankRepository.findBanksByAccount_Id(accountId));
     }
 
     @Override
     public void changeAmount(Long bankID, float amount) {
-        bankRepository.setAmount(bankID, amount);
-    }
-
-    @Override
-    public List<Bank> getNotUserBanks(Long id) {
-        List<Bank> allBanks = bankRepository.findAll();
-        List<Bank> userBanks = bankRepository.findBanksByAccount_Id(id);
-        for (Bank bank : userBanks) {
-            bank.setAmount(0);
-            allBanks.remove(bank);
+        Optional<Bank> optionalBank = bankRepository.findById(bankID);
+        if (optionalBank.isPresent()) {
+            Bank bank = optionalBank.get();
+            bank.setAmount(bank.getAmount() + amount);
+            bankRepository.save(bank);
+        } else {
+            throw new IllegalArgumentException();
         }
-        return allBanks;
     }
 }

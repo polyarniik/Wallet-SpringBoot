@@ -72,13 +72,14 @@ header {
     margin-right: 0;
 }
 
-.menu p {
+.menu a {
     display: flex;
     align-items: center;
     padding: 10px;
+    width: min-content;
     margin: 0;
     background-color: #50aa46;
-    width: fit-content;
+    /*width: fit-content;*/
     border-radius: 15px;
     text-transform: uppercase;
     letter-spacing: .27em;
@@ -86,7 +87,7 @@ header {
     text-decoration: none;
 }
 
-.menu p:hover {
+.menu a:hover {
     text-decoration: underline;
 }
 
@@ -104,6 +105,10 @@ header {
 .profile a {
     color: #000;
     text-decoration: none;
+}
+
+.profile a:hover {
+    text-decoration: underline;
 }
 
 .banks {
@@ -204,12 +209,12 @@ button .close:focus {
 
 .form-row input {
     /*border-radius: 10px;*/
-    height: 40px;
+    height: 50px;
 }
 
 .form-row select {
     /*border-radius: 10px;*/
-    height: 40px;
+    height: 50px;
 }
 
 .form-control:focus {
