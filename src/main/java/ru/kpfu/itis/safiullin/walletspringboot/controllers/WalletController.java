@@ -18,6 +18,7 @@ import ru.kpfu.itis.safiullin.walletspringboot.services.BankServiceImpl;
 import ru.kpfu.itis.safiullin.walletspringboot.services.CategoryServiceImpl;
 import ru.kpfu.itis.safiullin.walletspringboot.services.RecordServiceImpl;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 @Controller
@@ -54,7 +55,7 @@ public class WalletController {
         model.addAttribute("records", records);
         model.addAttribute("categories", categories);
         model.addAttribute("recordForm", new RecordForm());
-        if (recordDto != null) {
+        if (recordDto.getId() != null) {
             model.addAttribute("editRecord", recordDto);
         }
         return "views/main";

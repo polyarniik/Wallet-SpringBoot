@@ -58,9 +58,8 @@ public class RecordRestController {
         }
     }
 
-//    @PatchMapping("/record/{account-id}/{record-id}")
-//    public ResponseEntity<RecordDto> createRecord(@PathVariable("account-id") Long accountId,
-//                                                  @PathVariable("record-id") Long recordId,
+//    @PatchMapping("/record/{record-id}")
+//    public ResponseEntity deleteRecord(@PathVariable("record-id") Long recordId,
 //                                                  BindingResult bindingResult,
 //                                                  @RequestBody RecordForm recordForm) {
 ////        RecordDto record = recordService.addRecord()

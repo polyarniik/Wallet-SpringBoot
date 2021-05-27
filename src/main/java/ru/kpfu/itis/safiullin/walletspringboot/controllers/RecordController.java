@@ -1,5 +1,6 @@
 package ru.kpfu.itis.safiullin.walletspringboot.controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -67,12 +68,12 @@ public class RecordController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/edit/{record-id}")
-    public String editRecord(@PathVariable("record-id") Long recordId, HttpServletRequest request) {
+    public String editRecord(@PathVariable("record-id") Long recordId, Model model) {
         RecordDto recordDto = recordService.getRecordByID(recordId);
         if (recordDto == null) {
             return "redirect:/";
         }
-        request.setAttribute("editRecord", recordDto);
+        model.addAttribute(recordDto);
         return "redirect:/";
     }
 }

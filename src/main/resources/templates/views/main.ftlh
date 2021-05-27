@@ -17,9 +17,6 @@
             <button type="button" class="modal-btn btn btn-primary col-md-4" data-toggle="modal"
                     data-target="#staticBackdrop">
                 Добавить банк +
-                <#if editRecord??>
-                    ${editRecord.id}
-                </#if>
             </button>
         </div>
         <div class="record-add-container">
