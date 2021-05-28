@@ -8,10 +8,8 @@ import ru.kpfu.itis.safiullin.walletspringboot.dto.BankDto;
 import ru.kpfu.itis.safiullin.walletspringboot.exceptions.NoSuchUserException;
 import ru.kpfu.itis.safiullin.walletspringboot.forms.SignUpForm;
 import ru.kpfu.itis.safiullin.walletspringboot.models.Account;
-import ru.kpfu.itis.safiullin.walletspringboot.models.Bank;
 import ru.kpfu.itis.safiullin.walletspringboot.repositories.AccountRepository;
 
-import java.util.Collections;
 import java.util.Optional;
 
 @Service

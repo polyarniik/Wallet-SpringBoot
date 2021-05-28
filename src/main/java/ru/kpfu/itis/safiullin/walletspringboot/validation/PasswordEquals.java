@@ -14,14 +14,16 @@ public @interface PasswordEquals {
     String message() default "Пароли не совпадают.";
 
     String password1();
+
     String password2();
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.RUNTIME)
-    @interface List{
+    @interface List {
         PasswordEquals[] value();
     }
-
-    Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};
 }

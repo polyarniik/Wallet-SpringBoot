@@ -13,12 +13,13 @@ import java.lang.annotation.Target;
 public @interface HasNumberAndLetter {
     String message() default "Пароль должен содержать буквы и числа";
 
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+
     @Target(ElementType.FIELD)
     @Retention(RetentionPolicy.RUNTIME)
-    @interface List{
+    @interface List {
         HasNumberAndLetter[] value();
     }
-
-    Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};
 }

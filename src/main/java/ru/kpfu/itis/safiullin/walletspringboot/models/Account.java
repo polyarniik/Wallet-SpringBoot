@@ -1,6 +1,9 @@
 package ru.kpfu.itis.safiullin.walletspringboot.models;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="account")
+@Table(name = "account")
 public class Account {
 
     @Id
@@ -30,15 +33,6 @@ public class Account {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-
-    public enum State {
-        ACTIVE, BANNED
-    }
-
-    public enum Role {
-        USER, ADMIN
-    }
-
     public boolean isActive() {
         return this.state == State.ACTIVE;
     }
@@ -49,6 +43,14 @@ public class Account {
 
     public boolean isAdmin() {
         return this.role == Role.ADMIN;
+    }
+
+    public enum State {
+        ACTIVE, BANNED
+    }
+
+    public enum Role {
+        USER, ADMIN
     }
 
 }

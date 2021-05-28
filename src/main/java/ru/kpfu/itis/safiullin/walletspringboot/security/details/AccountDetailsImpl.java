@@ -10,7 +10,7 @@ import java.util.Collections;
 
 public class AccountDetailsImpl implements UserDetails {
 
-    private Account account;
+    private final Account account;
 
     public AccountDetailsImpl(Account account) {
 

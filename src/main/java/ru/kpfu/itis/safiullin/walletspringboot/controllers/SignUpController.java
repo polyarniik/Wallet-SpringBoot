@@ -25,7 +25,7 @@ public class SignUpController {
 
     @GetMapping("/signUp")
     public String getSingUp(Model model) {
-        model.addAttribute("form",new SignUpForm());
+        model.addAttribute("form", new SignUpForm());
         return "views/sign_up_page";
     }
 

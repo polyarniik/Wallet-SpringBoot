@@ -1,6 +1,5 @@
 package ru.kpfu.itis.safiullin.walletspringboot.services;
 
-import ru.kpfu.itis.safiullin.walletspringboot.dto.AccountDto;
 import ru.kpfu.itis.safiullin.walletspringboot.dto.RecordDto;
 import ru.kpfu.itis.safiullin.walletspringboot.forms.RecordForm;
 

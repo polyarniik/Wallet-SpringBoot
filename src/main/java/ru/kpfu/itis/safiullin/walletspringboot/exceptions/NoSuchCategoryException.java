@@ -3,7 +3,7 @@ package ru.kpfu.itis.safiullin.walletspringboot.exceptions;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-public class NoSuchCategoryException extends WalletException{
+public class NoSuchCategoryException extends WalletException {
     public NoSuchCategoryException() {
         super();
     }

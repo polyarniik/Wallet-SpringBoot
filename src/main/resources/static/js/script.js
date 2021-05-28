@@ -80,7 +80,7 @@ function addRecord(id, record, header, csrf) {
         },
         success: function (response) {
             let tbody = $('#record-table').find('tbody')
-            tbody.append(getFormattedRecord(response), tbody.firstChild)
+            tbody.before(getFormattedRecord(response), tbody.firstChild)
         },
         error: function (msg) {
             console.log(msg);

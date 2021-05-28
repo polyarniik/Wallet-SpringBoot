@@ -2,7 +2,6 @@ package ru.kpfu.itis.safiullin.walletspringboot.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,6 @@ import ru.kpfu.itis.safiullin.walletspringboot.forms.RecordForm;
 import ru.kpfu.itis.safiullin.walletspringboot.security.details.AccountDetailsImpl;
 import ru.kpfu.itis.safiullin.walletspringboot.services.*;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 @Controller

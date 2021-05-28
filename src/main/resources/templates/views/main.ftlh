@@ -50,9 +50,10 @@
                     </div>
                     <div class="form-group col-md-2">
                         <input class="record-input  form-control" id="record-input" name="sum" type=number
-                               placeholder="0"
                                 <#if editRecord??>
-                                    value="${editRecord.sum}"
+                                    placeholder="${editRecord.sum}"
+                                <#else>
+                                    placeholder="0"
                                 </#if>
                                min="0"
                                max="1000000000"

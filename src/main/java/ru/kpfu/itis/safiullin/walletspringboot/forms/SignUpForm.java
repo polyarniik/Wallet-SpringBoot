@@ -1,6 +1,9 @@
 package ru.kpfu.itis.safiullin.walletspringboot.forms;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import ru.kpfu.itis.safiullin.walletspringboot.validation.HasNumberAndLetter;
 import ru.kpfu.itis.safiullin.walletspringboot.validation.PasswordEquals;
@@ -20,8 +23,8 @@ public class SignUpForm {
     private String name;
     @Email(message = "Неправильный Email")
     private String email;
-    @Length(min= 8, message = "Минимальная длина пароля 8 символов")
-    @Length(max= 256, message = "Максимальная длина пароля 256 символов")
+    @Length(min = 8, message = "Минимальная длина пароля 8 символов")
+    @Length(max = 256, message = "Максимальная длина пароля 256 символов")
     @HasNumberAndLetter
     private String password1;
     private String password2;

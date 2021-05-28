@@ -34,6 +34,7 @@ public class BankServiceImpl implements BankService {
                         .build()
         );
     }
+
     @Override
     public void addBankToUser(BankDto bankDto, Long accountId) {
         Optional<Account> accountOptional = accountRepository.findById(accountId);

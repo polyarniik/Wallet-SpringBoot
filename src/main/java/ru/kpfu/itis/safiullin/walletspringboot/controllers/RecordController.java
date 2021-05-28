@@ -1,7 +1,5 @@
 package ru.kpfu.itis.safiullin.walletspringboot.controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -11,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.kpfu.itis.safiullin.walletspringboot.dto.AccountDto;
 import ru.kpfu.itis.safiullin.walletspringboot.dto.RecordDto;
 import ru.kpfu.itis.safiullin.walletspringboot.forms.RecordForm;
 import ru.kpfu.itis.safiullin.walletspringboot.security.details.AccountDetailsImpl;
@@ -21,9 +17,6 @@ import ru.kpfu.itis.safiullin.walletspringboot.services.AccountService;
 import ru.kpfu.itis.safiullin.walletspringboot.services.BankService;
 import ru.kpfu.itis.safiullin.walletspringboot.services.CategoryService;
 import ru.kpfu.itis.safiullin.walletspringboot.services.RecordService;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @SessionAttributes(types = RecordDto.class)

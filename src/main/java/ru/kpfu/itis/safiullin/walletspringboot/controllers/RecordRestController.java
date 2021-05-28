@@ -62,7 +62,7 @@ public class RecordRestController {
     public ResponseEntity<RecordDto> getRecord(@PathVariable("account-id") Long accountId,
                                                @PathVariable("record-id") Long recordId,
                                                @RequestBody RecordForm recordForm,
-                                               BindingResult bindingResult){
+                                               BindingResult bindingResult) {
         try {
             if (!bindingResult.hasErrors()) {
                 RecordDto recordDto = recordService.editRecord(recordForm, recordId, accountId);
@@ -77,8 +77,8 @@ public class RecordRestController {
 
     @PatchMapping("/record/{record-id}")
     public String deleteRecord(@PathVariable("record-id") Long recordId,
-                                                  BindingResult bindingResult,
-                                                  @RequestBody RecordForm recordForm) {
+                               BindingResult bindingResult,
+                               @RequestBody RecordForm recordForm) {
         try {
             recordService.deleteRecord(recordId);
             return "OK";
@@ -86,4 +86,4 @@ public class RecordRestController {
             return "FAIL";
         }
     }
-    }
+}
