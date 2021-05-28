@@ -30,18 +30,18 @@ public class SignUpController {
     }
 
     @PostMapping("/signUp")
-    public RedirectView signUp(Model model, @Valid SignUpForm form, BindingResult result, HttpServletRequest request) {
+    public String signUp(Model model, @Valid SignUpForm form, BindingResult result, HttpServletRequest request) {
         if (result.hasErrors()) {
             model.addAttribute("errorList", result.getAllErrors());
             model.addAttribute("form", form);
-            return new RedirectView("signUp");
+            return "views/sign_up_page";
         }
         try {
             accountService.singUpAccount(form);
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", "Аккаунт с таким email уже существует!");
-            return new RedirectView("signUp");
+            return "views/sign_up_page";
         }
-        return new RedirectView("signIn");
+        return "redirect:/signInd";
     }
 }
