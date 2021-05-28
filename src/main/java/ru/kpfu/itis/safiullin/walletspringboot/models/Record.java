@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -29,4 +30,7 @@ public class Record {
     private float sum;
     private String description;
     private Date date;
+
+    @ManyToMany(mappedBy = "records")
+    private List<Tag> tags;
 }
