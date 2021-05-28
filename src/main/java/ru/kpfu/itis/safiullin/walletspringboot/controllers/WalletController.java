@@ -13,10 +13,7 @@ import ru.kpfu.itis.safiullin.walletspringboot.dto.CategoryDto;
 import ru.kpfu.itis.safiullin.walletspringboot.dto.RecordDto;
 import ru.kpfu.itis.safiullin.walletspringboot.forms.RecordForm;
 import ru.kpfu.itis.safiullin.walletspringboot.security.details.AccountDetailsImpl;
-import ru.kpfu.itis.safiullin.walletspringboot.services.AccountServiceImpl;
-import ru.kpfu.itis.safiullin.walletspringboot.services.BankServiceImpl;
-import ru.kpfu.itis.safiullin.walletspringboot.services.CategoryServiceImpl;
-import ru.kpfu.itis.safiullin.walletspringboot.services.RecordServiceImpl;
+import ru.kpfu.itis.safiullin.walletspringboot.services.*;
 
 import java.sql.SQLOutput;
 import java.util.List;
@@ -25,19 +22,22 @@ import java.util.List;
 @SessionAttributes(types = RecordDto.class)
 public class WalletController {
 
-    private final AccountServiceImpl accountService;
+    private final AccountService accountService;
 
-    private final BankServiceImpl bankService;
+    private final BankService bankService;
 
-    private final RecordServiceImpl recordService;
+    private final RecordService recordService;
 
-    private final CategoryServiceImpl categoryService;
+    private final CategoryService categoryService;
 
-    public WalletController(AccountServiceImpl accountService, BankServiceImpl bankService, RecordServiceImpl recordService, CategoryServiceImpl categoryService) {
+    private final CurrencyService currencyService;
+
+    public WalletController(AccountService accountService, BankService bankService, RecordService recordService, CategoryService categoryService, CurrencyService currencyService) {
         this.accountService = accountService;
         this.bankService = bankService;
         this.recordService = recordService;
         this.categoryService = categoryService;
+        this.currencyService = currencyService;
     }
 
     @GetMapping("/")
@@ -55,6 +55,8 @@ public class WalletController {
         model.addAttribute("records", records);
         model.addAttribute("categories", categories);
         model.addAttribute("recordForm", new RecordForm());
+//        System.out.println(records.get(0).getCategories());
+//        model.addAttribute("currency", currencyService.getCurrency());
         if (recordDto.getId() != null) {
             model.addAttribute("editRecord", recordDto);
         }

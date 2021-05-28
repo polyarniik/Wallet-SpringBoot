@@ -14,17 +14,14 @@
                     </div>
                 </div>
             </#list>
-            <button type="button" class="modal-btn btn btn-primary col-md-4" data-toggle="modal"
-                    data-target="#staticBackdrop">
-                Добавить банк +
-            </button>
+            <a href="<@spring.url '/addBank'/>" class="btn btn-primary col-md-4"> Добавить банк +</a>
         </div>
         <div class="record-add-container">
             <@spring.bind "recordForm"/>
             <form method="post" action="" id="add-record-form">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
-                <#--                <input type="hidden" name="accountId" value="${currentUser.id}"/>-->
+                                <input type="hidden" name="accountId" value="${currentUser.id}"/>
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <select class="bank-select form-control" name="bankId" required>
@@ -131,7 +128,7 @@
                         <#list records as record>
                             <tr>
                                 <td class="edit-icon">
-                                    <a href="/edit/${record.id}"><i class="fas fa-edit"></i></a>
+                                    <a href="<@spring.url '/edit/${record.id}'/>"><i class="fas fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <div class="record-category">
@@ -151,7 +148,7 @@
                                     <#if record.date??>${record.date}</#if>
                                 </td>
                                 <td class="delete-icon">
-                                    <a href="/del/${record.id}"><i class="fas fa-trash"></i></a>
+                                    <a href="<@spring.url '/del/${record.id}'/>"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                         </#list>

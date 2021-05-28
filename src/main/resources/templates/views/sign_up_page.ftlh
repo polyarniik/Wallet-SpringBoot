@@ -19,6 +19,7 @@
                    required>
             <input name="password2" type="password" id="inputPassword2" class="form-control last"
                    placeholder="Повтор пароля" required>
+            <a href="<@spring.url 'signIn'/>">Войти!</a>
             <#if errorList?has_content>
                 <#list errorList as error>
                     <div class="alert alert-danger" role="alert">

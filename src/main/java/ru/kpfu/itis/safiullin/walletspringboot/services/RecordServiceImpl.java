@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.safiullin.walletspringboot.dto.RecordDto;
+import ru.kpfu.itis.safiullin.walletspringboot.exceptions.NoSuchRecordException;
+import ru.kpfu.itis.safiullin.walletspringboot.exceptions.NoSuchUserException;
 import ru.kpfu.itis.safiullin.walletspringboot.forms.RecordForm;
 import ru.kpfu.itis.safiullin.walletspringboot.models.Account;
 import ru.kpfu.itis.safiullin.walletspringboot.models.Bank;
@@ -44,7 +46,7 @@ public class RecordServiceImpl implements RecordService {
         try {
             return RecordDto.from(recordRepository.findRecordsByAccount_IdOrderByDateDesc(accountId));
         } catch (NullPointerException ex) {
-            return null;
+            throw new NoSuchRecordException();
         }
     }
 
@@ -53,7 +55,7 @@ public class RecordServiceImpl implements RecordService {
         try {
             recordRepository.deleteById(recordId);
         } catch (EmptyResultDataAccessException ex) {
-            throw new IllegalArgumentException();
+            throw new NoSuchRecordException();
         }
     }
 
@@ -61,11 +63,11 @@ public class RecordServiceImpl implements RecordService {
     public RecordDto editRecord(RecordForm recordForm, Long recordId, Long accountId) {
         Optional<Record> recordOptional = recordRepository.findRecordById(recordId);
         if (!recordOptional.isPresent()) {
-            return null;
+            throw new NoSuchRecordException();
         }
         Record record = recordOptional.get();
         if (record.getAccount().getId() != accountId) {
-            return null;
+            throw new NoSuchRecordException();
         }
         if (!recordForm.getIsIncome()) {
             record.setSum(-record.getSum());
@@ -90,7 +92,7 @@ public class RecordServiceImpl implements RecordService {
         Optional<Bank> bank = bankRepository.findById(record.getBankId());
         Optional<Category> category = categoryRepository.findById(record.getCategoryId());
         if (!account.isPresent() || !bank.isPresent() || !category.isPresent()) {
-            return null;
+            throw new NoSuchUserException();
         }
         Record rec = Record.builder()
                 .account(account.get())
@@ -108,6 +110,6 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public RecordDto getRecordByID(Long recordID) {
         Optional<Record> record = recordRepository.findRecordById(recordID);
-        return record.map(RecordDto::fromRecord).orElse(null);
+        return record.map(RecordDto::fromRecord).orElseThrow(NoSuchUserException::new);
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import ru.kpfu.itis.safiullin.walletspringboot.dto.AccountDto;
 import ru.kpfu.itis.safiullin.walletspringboot.dto.RecordDto;
 import ru.kpfu.itis.safiullin.walletspringboot.forms.RecordForm;
@@ -45,35 +46,36 @@ public class RecordController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/")
-    public String createRecord(@AuthenticationPrincipal AccountDetailsImpl account, RecordForm recordForm, BindingResult result, Model model) {
+    public RedirectView createRecord(@AuthenticationPrincipal AccountDetailsImpl account, RecordForm recordForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("error", result.getAllErrors());
             model.addAttribute("recordForm", recordForm);
         }
         recordService.addRecord(recordForm, account.getId());
-        return "redirect:/";
+        return new RedirectView("/");
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/del/{record-id}")
-    public String deleteRecord(@PathVariable("record-id") Long recordId) {
+    public RedirectView deleteRecord(@PathVariable("record-id") Long recordId) {
         System.out.println("recordId = " + recordId);
         try {
             recordService.deleteRecord(recordId);
         } catch (IllegalArgumentException ex) {
-            return "redirect:/";
+            return new RedirectView("redirect");
         }
-        return "redirect:/";
+        return new RedirectView("/");
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/edit/{record-id}")
-    public String editRecord(@PathVariable("record-id") Long recordId, Model model) {
+    public RedirectView editRecord(@PathVariable("record-id") Long recordId, Model model) {
         RecordDto recordDto = recordService.getRecordByID(recordId);
         if (recordDto == null) {
-            return "redirect:/";
+            return new RedirectView("/");
         }
         model.addAttribute(recordDto);
-        return "redirect:/";
+        return new RedirectView("/");
+
     }
 }

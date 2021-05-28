@@ -3,7 +3,11 @@ package ru.kpfu.itis.safiullin.walletspringboot.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.safiullin.walletspringboot.dto.BankDto;
+import ru.kpfu.itis.safiullin.walletspringboot.exceptions.NoSuchBankException;
+import ru.kpfu.itis.safiullin.walletspringboot.exceptions.NoSuchUserException;
+import ru.kpfu.itis.safiullin.walletspringboot.models.Account;
 import ru.kpfu.itis.safiullin.walletspringboot.models.Bank;
+import ru.kpfu.itis.safiullin.walletspringboot.repositories.AccountRepository;
 import ru.kpfu.itis.safiullin.walletspringboot.repositories.BankRepository;
 
 import java.util.List;
@@ -12,10 +16,12 @@ import java.util.Optional;
 @Service
 public class BankServiceImpl implements BankService {
     private final BankRepository bankRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public BankServiceImpl(BankRepository bankRepository) {
+    public BankServiceImpl(BankRepository bankRepository, AccountRepository accountRepository) {
         this.bankRepository = bankRepository;
+        this.accountRepository = accountRepository;
     }
 
     @Override
@@ -28,6 +34,20 @@ public class BankServiceImpl implements BankService {
                         .build()
         );
     }
+    @Override
+    public void addBankToUser(BankDto bankDto, Long accountId) {
+        Optional<Account> accountOptional = accountRepository.findById(accountId);
+        if (accountOptional.isPresent()) {
+            bankRepository.save(Bank.builder()
+                    .account(accountOptional.get())
+                    .color(bankDto.getColor())
+                    .name(bankDto.getName())
+                    .amount(bankDto.getAmount())
+                    .build());
+        } else {
+            throw new NoSuchUserException();
+        }
+    }
 
     @Override
     public BankDto findById(Long id) {
@@ -35,7 +55,7 @@ public class BankServiceImpl implements BankService {
         if (bank.isPresent()) {
             return BankDto.fromBank(bank.get());
         } else {
-            throw new IllegalArgumentException();
+            throw new NoSuchBankException();
         }
     }
 
@@ -61,7 +81,7 @@ public class BankServiceImpl implements BankService {
             bank.setAmount(bank.getAmount() + amount);
             bankRepository.save(bank);
         } else {
-            throw new IllegalArgumentException();
+            throw new NoSuchBankException();
         }
     }
 }

@@ -17,7 +17,7 @@
                 </div>
             </#if>
             <button type="submit" class="btn btn-lg btn-primary btn-block">Войти</button>
-            <a href="/signUp">Зарегистрироваться!</a>
+            <a href="<@spring.url 'signUp'/>">Зарегистрироваться!</a>
         </form>
         <#--        <c:if test="${not empty requestScope.loginErr}">-->
         <#--            <span class="loginErr" style="color:red;"><c:out value=""/></span>-->

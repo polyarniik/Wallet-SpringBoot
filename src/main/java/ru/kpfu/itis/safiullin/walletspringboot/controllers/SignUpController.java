@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 import ru.kpfu.itis.safiullin.walletspringboot.forms.SignUpForm;
 import ru.kpfu.itis.safiullin.walletspringboot.services.AccountServiceImpl;
 
@@ -29,31 +30,18 @@ public class SignUpController {
     }
 
     @PostMapping("/signUp")
-    public String signUp(Model model, @Valid SignUpForm form, BindingResult result, HttpServletRequest request) {
+    public RedirectView signUp(Model model, @Valid SignUpForm form, BindingResult result, HttpServletRequest request) {
         if (result.hasErrors()) {
             model.addAttribute("errorList", result.getAllErrors());
             model.addAttribute("form", form);
-            return "views/sign_up_page";
+            return new RedirectView("signUp");
         }
         try {
             accountService.singUpAccount(form);
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", "Аккаунт с таким email уже существует!");
-            return "views/sign_up_page";
+            return new RedirectView("signUp");
         }
-//        try {
-//            userService.addUser(form);
-//        }
-//        catch (OccupiedEmailException e){
-//            model.addAttribute("emailError", true);
-//            model.addAttribute("form", form);
-//            return "signUp";
-//        }
-//        try {
-//            request.login(form.getEmail(), form.getPassword());
-//        } catch (ServletException e) {
-//            throw new IllegalArgumentException(e);
-//        }
-        return "redirect:/";
+        return new RedirectView("signIn");
     }
 }
