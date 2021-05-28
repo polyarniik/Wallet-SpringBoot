@@ -72,15 +72,14 @@ public class RecordServiceImpl implements RecordService {
         if (!recordForm.getIsIncome()) {
             record.setSum(-record.getSum());
         }
-        return RecordDto.fromRecord(recordRepository.save(
-                recordRepository.save(Record.builder()
-                        .id(recordId)
-                        .account(Account.builder().id(accountId).build())
-                        .category(Category.builder().id(recordForm.getCategoryId()).build())
-                        .description(recordForm.getDescription())
-                        .sum(record.getSum())
-                        .date(recordForm.getDate())
-                        .build())));
+        return RecordDto.fromRecord(recordRepository.save(Record.builder()
+                .id(recordId)
+                .account(Account.builder().id(accountId).build())
+                .category(Category.builder().id(recordForm.getCategoryId()).build())
+                .description(recordForm.getDescription())
+                .sum(record.getSum())
+                .date(recordForm.getDate())
+                .build()));
     }
 
     @Override

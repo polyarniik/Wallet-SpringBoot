@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.safiullin.walletspringboot.dto.RecordDto;
+import ru.kpfu.itis.safiullin.walletspringboot.exceptions.NoSuchRecordException;
 import ru.kpfu.itis.safiullin.walletspringboot.forms.RecordForm;
 import ru.kpfu.itis.safiullin.walletspringboot.services.AccountService;
 import ru.kpfu.itis.safiullin.walletspringboot.services.RecordService;
@@ -49,19 +50,40 @@ public class RecordRestController {
     public ResponseEntity<RecordDto> createRecord(@PathVariable("account-id") Long accountId,
                                                   @RequestBody RecordForm recordForm,
                                                   BindingResult bindingResult) {
-        RecordDto record = recordService.addRecord(recordForm, accountId);
         if (!bindingResult.hasErrors()) {
-            System.out.println("record = " + record);
+            RecordDto record = recordService.addRecord(recordForm, accountId);
             return ResponseEntity.ok(record);
         } else {
             return ResponseEntity.badRequest().build();
         }
     }
 
-//    @PatchMapping("/record/{record-id}")
-//    public ResponseEntity deleteRecord(@PathVariable("record-id") Long recordId,
-//                                                  BindingResult bindingResult,
-//                                                  @RequestBody RecordForm recordForm) {
-////        RecordDto record = recordService.addRecord()
-//    }
+    @PutMapping("edit-record/{account-id}/{record-id}")
+    public ResponseEntity<RecordDto> getRecord(@PathVariable("account-id") Long accountId,
+                                               @PathVariable("record-id") Long recordId,
+                                               @RequestBody RecordForm recordForm,
+                                               BindingResult bindingResult){
+        try {
+            if (!bindingResult.hasErrors()) {
+                RecordDto recordDto = recordService.editRecord(recordForm, recordId, accountId);
+                return ResponseEntity.ok(recordDto);
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
+        } catch (NoSuchRecordException ex) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PatchMapping("/record/{record-id}")
+    public String deleteRecord(@PathVariable("record-id") Long recordId,
+                                                  BindingResult bindingResult,
+                                                  @RequestBody RecordForm recordForm) {
+        try {
+            recordService.deleteRecord(recordId);
+            return "OK";
+        } catch (NoSuchRecordException ex) {
+            return "FAIL";
+        }
+    }
     }
