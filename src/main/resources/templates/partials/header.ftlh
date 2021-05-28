@@ -7,7 +7,7 @@
     </div>
     <nav class="menu">
         <a href="<@spring.url '/'/>">Wallet</a>
-        <p>1 USD = 73 pуб</p>
+        <p>1 USD = ${currency} pуб</p>
     </nav>
     <div class="profile">
         <#if currentUser?has_content>

@@ -54,7 +54,7 @@ public class WalletController {
         model.addAttribute("categories", categories);
         model.addAttribute("recordForm", new RecordForm());
 //        System.out.println(records.get(0).getCategories());
-//        model.addAttribute("currency", currencyService.getCurrency());
+        model.addAttribute("currency", currencyService.getCurrency());
         if (recordDto.getId() != null) {
             model.addAttribute("editRecord", recordDto);
         }

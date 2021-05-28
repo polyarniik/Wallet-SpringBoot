@@ -98,8 +98,13 @@ function getFormattedRecord(response) {
         '</div>' + response.category.name + '</div></td>' +
         '<td class="record-account text-center">' + response.bank.name + '</td>' +
         '<td class="record-description text-center"></td><td class="record-sum text-center">' + response.sum + '</td>' +
-        '<td class="record-date text-right">\n' + response.date + '</td>' +
+        '<td class="record-date text-right">\n' + new Date(response.date) + '</td>' +
         '<td class="delete-icon"><a href="/del/' + response.id + '"><i class="fas fa-trash"></i></a></td>' +
         '</tr>'
     return text
+}
+
+function dateParse(date) {
+    let d = new Date(date)
+    return d.getDay() + "." + d.getMonth() + "." + d.getFullYear()
 }
