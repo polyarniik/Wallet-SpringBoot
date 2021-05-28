@@ -42,6 +42,6 @@ public class SignUpController {
             model.addAttribute("error", "Аккаунт с таким email уже существует!");
             return "views/sign_up_page";
         }
-        return "redirect:/signInd";
+        return "redirect:/signIn";
     }
 }
